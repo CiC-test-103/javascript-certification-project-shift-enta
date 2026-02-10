@@ -47,19 +47,17 @@ async function handleCommand(command) {
       console.log("Adding student...");
       const [name, year, email, specialization] = args;
       // --------> WRITE YOUR CODE BELOW
-      if (!name && year && email && specialization) {
-        const newStudent = new Student(name, year, email, specialization);
-        studentManagementSystem.add(newStudent);
-        studentManagementSystem.display();
-        break;
-      } else {
+      if (!name || !year || !email || !specialization) {
         console.log(
           "Erroe: Please provide all required arguments (name,year,email, specialization",
         );
+        break;
       }
-
-      // --------> WRITE YOUR CODE ABOVE
+      const newStudent = new Student(name, year, email, specialization);
+      studentManagementSystem.add(newStudent);
+      studentManagementSystem.display();
       break;
+    // --------> WRITE YOUR CODE ABOVE
 
     case "remove":
       /**
@@ -109,20 +107,21 @@ async function handleCommand(command) {
       console.log("Finding student...");
       const findEmail = args[0];
 
+      // --------> WRITE YOUR CODE BELOW
       if (!findEmail) {
         console.log("please provide an email to find");
+        break;
       }
-      // --------> WRITE YOUR CODE BELOW
 
-      // --------> WRITE YOUR CODE ABOVE
-      break;
       const student = studentManagementSystem.findStudent(findEmail);
+
       if (student) {
         student.display();
       } else {
-        consoele.log("student does not exist");
+        console.log("student does not exist");
       }
       break;
+      // --------> WRITE YOUR CODE ABOVE
     }
 
     case "save": {
@@ -164,9 +163,10 @@ async function handleCommand(command) {
         const loadFileName = args[0];
         if (!loadFileName) {
           console.log("Error: Please provide a file name");
+          break;
         }
         // --------> WRITE YOUR CODE ABOVE
-        break;
+
         studentManagementSystem.loadFromJSON(loadFileName);
         studentManagementSystem.display();
         break;
