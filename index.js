@@ -49,12 +49,13 @@ async function handleCommand(command) {
       // --------> WRITE YOUR CODE BELOW
       if (!name || !year || !email || !specialization) {
         console.log(
-          "Erroe: Please provide all required arguments (name,year,email, specialization",
+          "Error: Please provide all required arguments (name,year,email, specialization",
         );
         break;
       }
       const newStudent = new Student(name, year, email, specialization);
       studentManagementSystem.add(newStudent);
+      console.log("student added succesfully");
       studentManagementSystem.display();
       break;
     // --------> WRITE YOUR CODE ABOVE
@@ -69,14 +70,15 @@ async function handleCommand(command) {
        *   - Use implemented functions in LinkedList to remove the Student, and display the updated LinkedList
        */
       console.log("Removing student...");
-      // --------> WRITE YOUR CODE BELOW
-      const removeEmail = args[0];
-      if (!removeEmail) {
-        console.log("please provide an email");
-        break;
-      }
 
-      studentManagementSystem.remove(removeEmail);
+      // --------> WRITE YOUR CODE BELOW
+      const removed = studentManagementSystem.remove(removeEmail);
+
+      if (removed) {
+        console.log(`Student with email ${removed} removed`);
+      } else {
+        console.log(`no student found with email ${removed}`);
+      }
       studentManagementSystem.display();
       // --------> WRITE YOUR CODE ABOVE
       break;
